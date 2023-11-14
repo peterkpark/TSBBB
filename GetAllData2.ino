@@ -9,6 +9,7 @@
 
 #include "Wire.h"
 #include <MPU6050_light.h>
+//#include <digital
 
 MPU6050 mpu(Wire);
 
@@ -35,6 +36,8 @@ void setup() {
   delay(1000);
   mpu.calcOffsets(true,true); // gyro and accelero
   Serial.println("Done!\n");
+
+  pinMode(11, OUTPUT);
   
 }
 
@@ -55,11 +58,13 @@ void loop() {
     }
 
     if (button == 0){
-      PORTB |= (1<<PB3);
+      //PORTB |= (1<<PB3);
+      digitalWrite(11, HIGH);
+
       Serial.println("button pressed");      
     }
     else{
-       PORTB |= (1<<PB3);     
+      digitalWrite(11, LOW);    
     }
     timer = millis();
     //delay(700);
@@ -67,3 +72,6 @@ void loop() {
     prevAccY = currAccY;
   }
 }
+
+
+
